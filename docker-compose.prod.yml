@@ -1,0 +1,20 @@
+version: "3"
+services:
+  nginx:
+    ports:
+      - "80:80"
+  node-app:
+    build: 
+      context: .
+      args:
+        NODE_ENV: production
+    environment:
+      - NODE_ENV=production
+      - MONGO_USER=naty
+      - MONGO_PASSWORD=mypassword
+    command: node index.js
+  mongo:
+    image: mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=naty
+      - MONGO_INITDB_ROOT_PASSWORD=mypassword
